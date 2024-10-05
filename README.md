@@ -21,14 +21,14 @@ Now that you've put a little thought into how you might design your database, it
 
 
 ```python
-# Import necessary packages
+import sqlite3
 
 ```
 
 
 ```python
-# Create the database school.sqlite 
-
+conn = sqlite3.connect('school.sqlite')
+print()
 ```
 
 ## Create a Table for Contact Information
@@ -37,8 +37,26 @@ Create a table called contactInfo to house contact information for both students
 
 
 ```python
-# Your code here
-```
+#Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+
+#SQL command to create the contactInfo table
+create_table_query = """
+CREATE TABLE contactInfo (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    role TEXT CHECK(role IN('student', 'staff')) NOT NULL,
+    telephone_number TEXT,
+    street TEXT,
+    city TEXT,
+    state TEXT,
+    zipcode TEXT
+);
+"""
+#Execute the SQL command to create the table
+
+cursor.execute(create_table_query)```
 
 ## Populate the Table
 
